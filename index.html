@@ -1,49 +1,58 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital Payment Verification</title>
+    <title>Digital Platform</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 </head>
 <body>
     <header>
-        <h1>Welcome to Digital Payment Verification</h1>
+        <h1>Welcome to Digital Platform</h1>
         <nav>
             <ul>
                 <li><a href="#home">Home</a></li>
-                <li><a href="#payments">Payments</a></li>
-                <li><a href="#messages">Messages</a></li>
+                <li><a href="#videoCall">Video Call</a></li>
+                <li><a href="#groupChat">Group Chat</a></li>
+                <li><a href="#upload">Upload</a></li>
+                <li><a href="#liveStream">Live Streaming</a></li>
             </ul>
         </nav>
     </header>
-    
+
     <main>
-        <section id="payments">
-            <h2>Payment Verification</h2>
-            <form id="paymentForm">
-                <input type="text" id="paymentAmount" placeholder="Enter amount in IDR" required>
-                <button type="submit">Verify Payment</button>
-            </form>
-            <div id="verificationResult"></div>
+        <section id="videoCall">
+            <h2>Video Call</h2>
+            <button id="startCall">Start Video Call</button>
         </section>
 
-        <section id="messages">
-            <h2>Messages</h2>
-            <div id="messageList"></div>
-            <form id="messageForm">
-                <input type="text" id="messageContent" placeholder="Type a message..." required>
+        <section id="groupChat">
+            <h2>Group Chat</h2>
+            <div id="chatList"></div>
+            <form id="chatForm">
+                <input type="text" id="chatMessage" placeholder="Type a message..." required>
                 <button type="submit">Send</button>
             </form>
+        </section>
+
+        <section id="upload">
+            <h2>Upload Media</h2>
+            <input type="file" id="videoUpload" accept="video/*">
+            <input type="file" id="mp3Upload" accept="audio/mp3">
+            <button id="uploadButton">Upload</button>
+        </section>
+
+        <section id="liveStream">
+            <h2>Live Streaming</h2>
+            <button id="startLiveStream">Start Live Stream</button>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2023 Digital Payment Verification by Nabila Ahmad Studio Development</p>
+        <p>&copy; 2023 Digital Platform by Nabila Ahmad Studio Development</p>
     </footer>
 
-    <script src="config.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
