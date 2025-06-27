@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Platform</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+</head>
+<body>
+    <header>
+        <h1>Welcome to Digital Platform</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#posts">Posts</a></li>
+                <li><a href="#messages">Messages</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="posts">
+            <h2>Posts</h2>
+            <form id="postForm">
+                <textarea id="postContent" placeholder="What's on your mind?" required></textarea>
+                <button type="submit">Post</button>
+            </form>
+            <div id="postList"></div>
+        </section>
+
+        <section id="messages">
+            <h2>Messages</h2>
+            <div id="messageList"></div>
+            <form id="messageForm">
+                <input type="text" id="messageContent" placeholder="Type a message..." required>
+                <button type="submit">Send</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Digital Platform by Nabila Ahmad Studio Development</p>
+    </footer>
+
+    <script>
+        const supabaseUrl = 'https://wejcgylojzxxgftzjeew.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndlamNneWxvanp4eGdmdHpqZWV3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA5MzI2ODgsImV4cCI6MjA2NjUwODY4OH0.iSE-gDfdqpmSY4VBCeGJc22kJiLIh9lg3KW5FJwMxw8';
+        const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+        document.getElementById('postForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const content = document.getElementById('postContent').value;
+            const { data, error } = await supabase
+                .from('posts')
+                .insert([{ content }]);
+            if (error) console.error(error);
+            else loadPosts();
+        });
+
+        async function loadPosts() {
+            const { data, error } = await supabase
+                .from('posts')
+                .select('*');
+            if (error) console.error(error);
+            else {
+                const postList = document.getElementById('postList');
+                postList.innerHTML = '';
+                data.forEach(post => {
+                    const postElement = document.createElement('div');
+                    postElement.textContent = post.content;
+                    postList.appendChild(postElement);
+                });
+            }
+        }
+
+        document.getElementById('messageForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const content = document.getElementById('messageContent').value;
+        });
+
+        loadPosts();
+    </script>
+</body>
+</html>
